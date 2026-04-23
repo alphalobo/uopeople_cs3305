@@ -1,7 +1,7 @@
 <?php
+$studentCount = 5; // Number of students to process
 $examCount = 3; // Number of exams to process
 $subjectCount = 5; // Number of subjects to process
-$studentCount = 2; // Number of students to process
 $maxMarkPerExam = 100; // Maximum total marks for percentage calculation
 $maxFailCount = 2; // Maximum number of failed subjects before probation
 
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Determine qualification for Honor Roll
         if ($examAverage > 90 && max($examScores) > 95) {
-            echo "Qualified for Honor Roll<br>";
+            echo "<strong>Qualified for Honor Roll</strong><br>";
         }
 
         // Check for failed subjects and count up if the subject was failed
@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Display the number of failed subjects
         echo "Failed subjects: $failCount<br>";
         // Check if the number of failed subjects exceeds the maximum allowed and display probation status if necessary
-        if ($failCount > $maxFailCount) {
+        if ($failCount >= $maxFailCount) {
             echo "<strong>Student is placed on academic probation.</strong><br>";
         }
 
@@ -103,7 +103,6 @@ function generateInputs($count, $student, $prefix, $label) {
                     <!-- Generate the input fields needed to enter the subject scores for this student based on the subject count -->
                     <?php generateInputs($subjectCount, $student, "sub", "Subject"); ?>
                 </div>
-                <br>
         <!-- End the loop for generating inputs for each student -->
             <?php endfor; ?>
         <!-- Submit button to trigger the form submission and processing of results -->
