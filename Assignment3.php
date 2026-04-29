@@ -1,6 +1,7 @@
 <?php
 
-echo "<pre>";
+echo "<pre>"; // Use <pre> tags to preserve formatting in the output
+
 // Question 1 Start
 echo "QUESTION 1\n";
 
@@ -20,7 +21,7 @@ function calculateDiscount($price, $discountPercent) {
 }
 
 echo "Total with tax (100 x 2): " . calculateTotal(100, 2) . "\n";
-echo "Formatted product name: " . formatProductName("   apple macbook pro 16 inch   ") . "\n";
+echo "Formatted product name: " . formatProductName("   high-end laptop   ") . "\n";
 echo "Discounted price (R200 at 10%): " . calculateDiscount(200, 10) . "\n";
 
 // Question 1 End
@@ -152,8 +153,10 @@ function analyzeDescription($description) {
 
 // Format customer review function
 function formatReview($review){
+    echo "Original review: $review\n"; // Print the original review before formatting
+
     $preview = (strlen($review) > 20) ? substr($review, 0, 20) . "..." : $review; // Extract and print the first 20 characters followed by "..."
-    echo $preview . "\n"; //  Print the preview of the review
+    echo "Preview: $preview\n"; // Print the preview of the review
 
     $position = stripos($review, 'excellent'); // Search for the word "excellent" and print its starting position
     if ($position !== false) {
@@ -163,7 +166,7 @@ function formatReview($review){
     }
 
     $updatedReview = $review . " Thank you for your feedback!"; // Concatenate the review with the message and print the full updated review
-    echo $updatedReview . "\n"; // Print the full updated review with the thank you message
+    echo "Updated review: " . $updatedReview . "\n"; // Print the full updated review with the thank you message
 }
 
 // Format description
@@ -177,7 +180,7 @@ $analysisText = "This is a high-quality monitor with deep contrast and brightnes
 analyzeDescription($analysisText); // Print the analysis of the product description
 
 // Format customer review
-echo "\nCustomer Review Processing:\n"; // Format a sample customer review and print the results of the formatting
+echo "\nCustomer Review Processing Example:\n"; // Format a sample customer review and print the results of the formatting
 $review = "Great product! Fast delivery and excellent service."; // Example customer review to format
 formatReview($review); // Print the formatted customer review with the preview, position of "excellent", and the full updated review
 
