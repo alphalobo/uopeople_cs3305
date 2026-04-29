@@ -60,10 +60,10 @@ function removeDuplicateProducts($products) {
 
 // Function to sort products by price in ascending order
 function sortProductByPriceAscending($products) {
-    usort($products, function($a, $b) {
-        return $a['price'] <=> $b['price'];
+    usort($products, function($a, $b) { // Use the spaceship operator to compare the price of two products
+        return $a['price'] <=> $b['price']; // Compare the price of two products and sort them in ascending order
     });
-    return $products;
+    return $products; // Return the sorted array of products
 }
 
 // Function to filter products by category
