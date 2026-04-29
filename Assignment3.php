@@ -122,6 +122,7 @@ echo "\nQUESTION 3:\n";
 function formatProductDescription($description){
     $result = strtolower($description); // Convert the description to lowercase for consistency
     $result = str_replace('_', ' ', $result); // Replace underscores with spaces to improve readability 
+    $result = ucfirst($result); // Capitalize only the first word's first letter
     return $result; // return the formatted description
 }
 
@@ -137,11 +138,11 @@ function analyzeDescription($description) {
     $wordCount = str_word_count($description); // Count and print the total number of words
     echo "Total words: $wordCount\n"; // Print the total number of words in the description
     
-    // Check if the word "leather" appears in the description
-    if (stripos(strtolower($description), 'leather') !== false) {
-        echo "Keyword found\n"; // Print "Keyword found" if the word "leather" is present in the description
+    // Check if the word "monitor" appears (instead of "leather" given the items I have) in the description
+    if (stripos(strtolower($description), 'monitor') !== false) {
+        echo "Keyword found\n"; // Print "Keyword found" if the word "monitor" is present in the description
     } else {
-        echo "Keyword not found\n"; // Print "Keyword not found" if the word "leather" is not present in the description
+        echo "Keyword not found\n"; // Print "Keyword not found" if the word "monitor" is not present in the description
     }
 }
 
@@ -162,13 +163,13 @@ function formatReview($review){
 }
 
 // Format description
-$rawDescription = "HIGH_QUALITY_LEATHER_wallet!!";
+$rawDescription = "HIGH_QUALITY_MONITOR_FOR_OFFICE_USE!!";
 echo "\nFormatted Description:\n";
 echo formatProductDescription($rawDescription) . "\n";
 
 // Analyze description
 echo "\nDescription Analysis:\n";
-$analysisText = "This is a high-quality leather wallet with RFID protection.";
+$analysisText = "This is a high-quality monitor with deep contrast and brightness.";
 analyzeDescription($analysisText);
 
 // Format customer review
