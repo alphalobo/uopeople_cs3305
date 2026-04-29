@@ -30,21 +30,21 @@ echo "\nQUESTION 2:\n";
 
 // array of products with categories
 $productSource1 = [
-    ["name" => "Dell 24 inch Monitor", "price" => 199.99, "category" => "Electronics", "description" => "24-inch FHD display with IPS panel"],
-    ["name" => "Dell 24 inch Monitor", "price" => 199.99, "category" => "Electronics", "description" => "24-inch FHD display with IPS panel"], // intentional duplicate for testing
-    ["name" => "Apple MacBook Pro", "price" => 1299.99, "category" => "Computers", "description" => "High-performance laptop with M-series chip"],
-    ["name" => "Samsung Galaxy S25", "price" => 799.99, "category" => "Mobile Phones", "description" => "Latest flagship Android smartphone"],
-    ["name" => "Sony WH-1000XM4 Headphones", "price" => 349.99, "category" => "Audio", "description" => "Premium noise-cancelling wireless headphones"],
-    ["name" => "Amazon Echo Dot", "price" => 49.99, "category" => "Smart Home", "description" => "Compact smart speaker with Alexa"],
+    ["name" => "Fancy Monitor", "price" => 199.99, "category" => "Electronics", "description" => "24-inch FHD display with IPS panel"],
+    ["name" => "Fancy Monitor", "price" => 199.99, "category" => "Electronics", "description" => "24-inch FHD display with IPS panel"], // intentional duplicate for testing
+    ["name" => "High-End Laptop", "price" => 1299.99, "category" => "Computers", "description" => "High-performance laptop with powerful processor"],
+    ["name" => "Flagship Smartphone", "price" => 799.99, "category" => "Mobile Phones", "description" => "Latest flagship smartphone with premium camera"],
+    ["name" => "Noise-Cancelling Headphones", "price" => 349.99, "category" => "Audio", "description" => "Premium noise-cancelling wireless headphones"],
+    ["name" => "Smart Home Speaker", "price" => 49.99, "category" => "Smart Home", "description" => "Compact smart speaker with voice assistant"],
 ];
 
 $productSource2 = [
-    ["name" => "Apple iPhone 15", "price" => 999.99, "category" => "Mobile Phones", "description" => "Latest iPhone with advanced camera system"],
-    ["name" => "Google Pixel 6", "price" => 599.99, "category" => "Mobile Phones", "description" => "Google's flagship phone with Tensor chip"],
-    ["name" => "Bose QuietComfort 35 II", "price" => 299.99, "category" => "Audio", "description" => "Comfortable noise-cancelling headphones"],
-    ["name" => "HP Spectre x360", "price" => 1099.99, "category" => "Computers", "description" => "Convertible 2-in-1 laptop with touchscreen"],
-    ["name" => "Amazon Echo Dot", "price" => 49.99, "category" => "Smart Home", "description" => "Compact smart speaker with Alexa"], // intentional duplicate from productSource1 for testing
-    ["name" => "Dell 24 inch Monitor", "price" => 199.99, "category" => "Electronics", "description" => "24-inch FHD display with IPS panel"], // intentional duplicate from productSource1 for testing
+    ["name" => "Premium Tablet", "price" => 999.99, "category" => "Mobile Phones", "description" => "High-end tablet with advanced display"],
+    ["name" => "Budget Smartphone", "price" => 599.99, "category" => "Mobile Phones", "description" => "Affordable smartphone with great features"],
+    ["name" => "Comfort Headphones", "price" => 299.99, "category" => "Audio", "description" => "Comfortable noise-cancelling headphones"],
+    ["name" => "Convertible Laptop", "price" => 1099.99, "category" => "Computers", "description" => "Convertible 2-in-1 laptop with touchscreen"],
+    ["name" => "Smart Home Speaker", "price" => 49.99, "category" => "Smart Home", "description" => "Compact smart speaker with voice assistant"], // intentional duplicate from productSource1 for testing
+    ["name" => "Fancy Monitor", "price" => 199.99, "category" => "Electronics", "description" => "24-inch FHD display with IPS panel"], // intentional duplicate from productSource1 for testing
 ];
 
 // Function to remove duplicate products based on their name, price, and category
@@ -70,6 +70,8 @@ function sortProductByPriceAscending($products) {
 function applyDiscountToCategory($products, $category, $discountPercent) {
     foreach ($products as &$product) { // Loop through each product by reference to modify it directly
         if ($product['category'] === $category) { // Check if the product's category matches the specified category
+            $product['name'] = $product['name'] . "*"; // Append an asterisk to the product's name to indicate that a discount has been applied
+            $product['description'] = "DISCOUNTED*: " . $product['description'] . " (discounted from $" . $product['price'] . ")"; // Prepend "DISCOUNTED*: " to the product's description to indicate that a discount has been applied
             $product['price'] = calculateDiscount($product['price'], $discountPercent); // Apply the discount to the product's price
         }
     }
@@ -92,23 +94,25 @@ $uniqueProducts = removeDuplicateProducts($sortedProducts);
 
 // Print the combined inventory
 echo "Combined Inventory:\n";
+// Loop over and print each product's name, price, category, and description in a formatted manner
 foreach ($uniqueProducts as $product) {
-    //echo "Name: " . $product['name'] . ", Price: $" . $product['price'] . ", Category: " . $product['category'] . "\n";
-
-    printf("Name: %-30s Price: $%-10.2f Category: %s\n",
+    printf("Name: %-30s Price: $%-10.2f Category: %-20s Description: %s\n",
     $product['name'],
     $product['price'],
-    $product['category']
+    $product['category'],
+    $product['description']
 );
 }
 
-$discountedProducts = applyDiscountToCategory($uniqueProducts, "Electronics", 10);
-
+echo "\nCombined Inventory After Electronics Discount:\n";
+$discountedProducts = applyDiscountToCategory($uniqueProducts, "Electronics", 10); // Apply a 10% discount to all products in the "Electronics" category and print the updated inventory
+// Loop over and print each product's name, price, category, and description in a formatted manner after applying the discount
 foreach ($discountedProducts as $product) {
-    printf("Name: %-30s Price: $%-10.2f Category: %s\n",
-        $product['name'],
-        $product['price'],
-        $product['category']
+    printf("Name: %-30s Price: $%-10.2f Category: %-20s Description: %s\n",
+    $product['name'],
+    $product['price'],
+    $product['category'],
+    $product['description']
     );
 }
 
@@ -116,7 +120,7 @@ foreach ($discountedProducts as $product) {
 
 // start of question 3
 
-echo "\nQUESTION 3:\n";
+echo "\nQUESTION 3:";
 
 // Format product description function
 function formatProductDescription($description){
@@ -163,19 +167,19 @@ function formatReview($review){
 }
 
 // Format description
-$rawDescription = "HIGH_QUALITY_MONITOR_FOR_OFFICE_USE!!";
-echo "\nFormatted Description:\n";
-echo formatProductDescription($rawDescription) . "\n";
+$rawDescription = "HIGH_QUALITY_MONITOR_FOR_OFFICE_USE!!"; // Example raw description with uppercase letters, underscores, and special characters
+echo "\nFormatted Description:\n"; // Format the raw description and print the formatted version
+echo formatProductDescription($rawDescription) . "\n"; // Print the formatted product description
 
 // Analyze description
-echo "\nDescription Analysis:\n";
-$analysisText = "This is a high-quality monitor with deep contrast and brightness.";
-analyzeDescription($analysisText);
+echo "\nDescription Analysis:\n"; // Analyze a sample product description and print the results of the analysis
+$analysisText = "This is a high-quality monitor with deep contrast and brightness.";// Example product description to analyze
+analyzeDescription($analysisText); // Print the analysis of the product description
 
 // Format customer review
-echo "\nCustomer Review Processing:\n";
-$review = "Great product! Fast delivery and excellent service.";
-formatReview($review);
+echo "\nCustomer Review Processing:\n"; // Format a sample customer review and print the results of the formatting
+$review = "Great product! Fast delivery and excellent service."; // Example customer review to format
+formatReview($review); // Print the formatted customer review with the preview, position of "excellent", and the full updated review
 
 // end of question 3
 ?>
